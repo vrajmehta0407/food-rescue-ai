@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: foodrescue-db
+    restart: always
+    environment:
+      POSTGRES_USER: foodrescue
+      POSTGRES_PASSWORD: rescue_secure_pass
+      POSTGRES_DB: foodrescue_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U foodrescue -d foodrescue_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: foodrescue-backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql+psycopg2://foodrescue:rescue_secure_pass@db:5432/foodrescue_db
+      SECRET_KEY: docker-compose-secret-key-foodrescue-2026
+      ENVIRONMENT: development
+      DEBUG: "True"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: foodrescue-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
+

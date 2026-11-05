@@ -1,0 +1,21 @@
+{
+  "model_version": "hist-gb-v1.0",
+  "trained_at": "2026-11-05T10:27:44.226881+00:00",
+  "split_method": "chronological (80/20 time-series)",
+  "train_samples": 576,
+  "test_samples": 144,
+  "baseline": {
+    "name": "7-Day Seasonal Rolling Mean",
+    "mae_kg": 12.07,
+    "rmse_kg": 14.15,
+    "wape_percent": 34.05
+  },
+  "candidate": {
+    "name": "HistGradientBoostingRegressor",
+    "mae_kg": 4.5,
+    "rmse_kg": 6.21,
+    "wape_percent": 12.7
+  },
+  "mae_improvement_percent": 62.71,
+  "status": "candidate_outperforms_baseline"
+}

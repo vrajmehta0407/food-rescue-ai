@@ -1,40 +1,9 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv/
-*.db
-*.sqlite3
-*.sqlite
-
-# Testing & Coverage
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Node & Frontend
-node_modules/
-dist/
-dist-ssr/
-*.local
-.npm
-.pnpm-debug.log*
-
-# Environment & Secrets
 .env
 .env.local
-.env.*.local
-
-# IDE & OS
-.idea/
-.vscode/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
+node_modules/
+apps/web/.next/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.tsbuildinfo
 

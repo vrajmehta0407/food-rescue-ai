@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-monospace, monospace;
+}
+
+body {
+  background-color: #eefaf8;
+  color: #0b2a2e;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Accessible 3px focus ring in Ocean Teal with white offset */
+*:focus-visible {
+  outline: 3px solid #00b8a9;
+  outline-offset: 2px;
+}
+
+.tabular-nums {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glass Surfaces (design.md #3) */
+.glass {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 10px 34px rgba(0, 184, 169, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+}
+
+.glass-teal {
+  background: rgba(0, 184, 169, 0.14);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(0, 184, 169, 0.3);
+  box-shadow: 0 10px 34px rgba(0, 184, 169, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border-radius: 28px;
+}
+
+.glass-tangerine {
+  background: rgba(255, 92, 31, 0.14);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 92, 31, 0.32);
+  box-shadow: 0 10px 34px rgba(255, 92, 31, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border-radius: 28px;
+}
+
+.glass-berry {
+  background: rgba(255, 61, 139, 0.14);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 61, 139, 0.34);
+  box-shadow: 0 10px 34px rgba(255, 61, 139, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border-radius: 28px;
+}
+
+@supports not (backdrop-filter: blur(18px)) {
+  .glass,
+  .glass-teal,
+  .glass-tangerine,
+  .glass-berry {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* Sunrise-Wave Background Drift */
+@keyframes driftA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, -30px, 0) scale(1.06);
+  }
+}
+
+@keyframes driftB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-45px, 28px, 0) scale(1.08);
+  }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-drift-a {
+  animation: driftA 36s ease-in-out infinite;
+}
+
+.animate-drift-b {
+  animation: driftB 42s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marqueeScroll 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-a,
+  .animate-drift-b,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+

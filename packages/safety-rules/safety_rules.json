@@ -1,0 +1,85 @@
+{
+  "_notice": "SAMPLE DATA - VERIFY BEFORE PRODUCTION USE. Consult local FSSAI food safety guidelines before deploying.",
+  "version": "1.0.0",
+  "categories": {
+    "cooked_rice_dish": {
+      "label": "Cooked Rice Dish (Biryani, Pulao, Khichdi)",
+      "max_hours_ambient": 2.0,
+      "max_hours_chilled": 12.0,
+      "warning_buffer_minutes": 30,
+      "blocked": false,
+      "requires_sealed_for_chilled": true,
+      "notes": "Cooked rice must be delivered within 2 hours at ambient temperature or 12 hours if kept chilled below 5°C."
+    },
+    "cooked_curry_dal": {
+      "label": "Cooked Curry, Dal & Sabzi",
+      "max_hours_ambient": 3.0,
+      "max_hours_chilled": 18.0,
+      "warning_buffer_minutes": 45,
+      "blocked": false,
+      "requires_sealed_for_chilled": true,
+      "notes": "Hot cooked curries and dals must be rescued within 3 hours at room temperature."
+    },
+    "breads_rotis": {
+      "label": "Rotis, Naan & Bakery Breads",
+      "max_hours_ambient": 8.0,
+      "max_hours_chilled": 24.0,
+      "warning_buffer_minutes": 60,
+      "blocked": false,
+      "requires_sealed_for_chilled": false,
+      "notes": "Dry flatbreads and baked goods stay safe up to 8 hours in clean, covered packaging."
+    },
+    "dairy_sweets": {
+      "label": "Dairy-Based Sweets & Desserts (Rasmalai, Kheer, Barfi)",
+      "max_hours_ambient": 4.0,
+      "max_hours_chilled": 24.0,
+      "warning_buffer_minutes": 45,
+      "blocked": false,
+      "requires_sealed_for_chilled": true,
+      "notes": "Milk-based sweets spoil quickly in warm weather; max 4 hours ambient or 24 hours chilled."
+    },
+    "cut_fruit_salad": {
+      "label": "Cut Fruit & Raw Salads",
+      "max_hours_ambient": 2.0,
+      "max_hours_chilled": 6.0,
+      "warning_buffer_minutes": 30,
+      "blocked": false,
+      "requires_sealed_for_chilled": true,
+      "notes": "Cut produce has a strict 2-hour ambient window to prevent bacterial growth."
+    },
+    "packaged_dry_staples": {
+      "label": "Sealed Packaged Dry Staples & Snacks",
+      "max_hours_ambient": 72.0,
+      "max_hours_chilled": 72.0,
+      "warning_buffer_minutes": 120,
+      "blocked": false,
+      "requires_sealed_for_chilled": false,
+      "notes": "Factory-sealed dry goods with intact packaging and valid best-before dates."
+    },
+    "raw_meat_seafood": {
+      "label": "Raw Meat, Poultry or Seafood",
+      "max_hours_ambient": 0.0,
+      "max_hours_chilled": 0.0,
+      "warning_buffer_minutes": 0,
+      "blocked": true,
+      "requires_sealed_for_chilled": true,
+      "notes": "High-risk raw animal protein is blocked from peer-to-peer rescue for food safety compliance."
+    },
+    "unpasteurized_dairy": {
+      "label": "Unpasteurized Milk or Open Cream",
+      "max_hours_ambient": 0.0,
+      "max_hours_chilled": 0.0,
+      "warning_buffer_minutes": 0,
+      "blocked": true,
+      "requires_sealed_for_chilled": true,
+      "notes": "Unpasteurized or open liquid dairy is blocked due to rapid pathogen risk."
+    }
+  },
+  "packaging_multipliers": {
+    "sealed_containers": 1.0,
+    "covered_trays": 0.85,
+    "open_unsealed": 0.5
+  },
+  "minimum_remaining_minutes_to_approve": 30
+}
+

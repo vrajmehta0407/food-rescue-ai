@@ -1,171 +1,114 @@
-# FoodRescue AI --- Design System & UX Direction
+# FoodRescue AI: Design System (design.md)
 
-## 1. Creative direction
+**Direction:** Light, colourful, glassy, Pinterest-style masonry. Not dark theme. Warm and hopeful, like a sunrise over a clean ocean. It must feel alive and human, not a generic app template.
 
-Create a distinctive, contemporary food-rescue experience that feels
-like an editorial Pinterest board crossed with a polished climate-tech
-product. The design should be colorful, warm, airy, layered, and
-premium. Avoid generic SaaS dashboard tropes, template-like sidebars,
-excessive rounded cards, and dark mode.
+---
 
-**Visual keywords:** harvest editorial, playful precision, botanical
-optimism, soft translucency, collage, asymmetrical rhythm, tactile
-paper, cinematic scroll, purposeful micro-interactions.
+## 1. Three-Colour Palette (strict)
+Two main colours plus one out-of-the-box accent. This palette is intentionally different from GridMind AI (which uses violet and lime). Do not reuse those.
 
-## 2. Palette
+| Role | Name | Hex |
+|---|---|---|
+| Brand 1 | **Tangerine Flame** | `#FF5C1F` |
+| Brand 2 | **Ocean Teal** | `#00B8A9` |
+| Accent (out-of-the-box) | **Berry Pop** | `#FF3D8B` |
+| Ink (text) | Deep Teal Ink | `#0B2A2E` |
+| Surface | Frost White | `#FFFFFF` |
+| Page tint | Sea Mist | `#EEFAF8` (teal-tinted white, never cream or beige) |
 
-Use a light canvas as the foundation: - Warm cream: `#FFF8EE` (page
-background) - Paper white: `#FFFFFF` (content surfaces) - Forest:
-`#1F5B43` (primary action / brand) - Leaf: `#83B879` (supporting) -
-Citrus: `#F6C94A` (highlight) - Coral: `#F17C65` (urgent / accent) -
-Berry: `#B84D72` (secondary accent) - Sky: `#B9DDF2` (visual balance) -
-Ink: `#24312B` (primary text) - Muted ink: `#6B756F` (secondary text) -
-Border: `#E9E3D9`
+**Rules**
+- Tangerine = primary actions, urgency (safe-by timers), key highlights, donate/rescue CTA.
+- Teal = success, delivered, verified, navigation, charts, calm surfaces.
+- **Berry Pop (hot pink) is the surprise accent, used sparingly (about 5-8% of any screen):** sticker badges, hearts/likes, the "thank you" moments, confetti sparkle, hover glows and one highlighted word in headlines. Never for body text, never for status, never as a large background.
+- No cream, beige, yellow, violet or lime anywhere.
+- Tints come only from opacity of the three colours (tangerine, teal 10/20/35%; berry 10/20%).
+- Berry on white fails small-text contrast, so use it only for fills, icons and large display text, with Deep Teal Ink text on top of berry fills.
+- Status without traffic lights: Available = tangerine, Matched = teal outline, In transit = teal solid, Delivered = teal with check sticker, Expiring soon = tangerine pulse.
 
-Maintain contrast. Accent colors are not interchangeable for semantic
-statuses.
+## 2. Background
+Animated **sunrise-wave**: 3-4 large blurred blobs (tangerine and teal at 25-35% opacity, `blur(90px)`) drifting slowly (30-45 s loops) over Sea Mist, plus one small berry blob at 15% opacity floating near the hero, a faint wavy line pattern and 3% noise.
 
-## 3. Typography
+## 3. Glass Surfaces
+```css
+.glass {
+  background: rgba(255,255,255,0.58);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.75);
+  box-shadow: 0 10px 34px rgba(0,184,169,0.14), inset 0 1px 0 rgba(255,255,255,0.85);
+  border-radius: 28px;
+}
+.glass-teal { background: rgba(0,184,169,0.14); border-color: rgba(0,184,169,0.3); }
+.glass-tangerine { background: rgba(255,92,31,0.14); border-color: rgba(255,92,31,0.32); }
+.glass-berry { background: rgba(255,61,139,0.14); border-color: rgba(255,61,139,0.34); }
+```
+Fallback without `backdrop-filter`: solid `rgba(255,255,255,0.92)`.
 
--   Display: expressive modern serif (e.g. Fraunces or equivalent) for
-    hero headlines and editorial statements.
--   UI/body: clean sans (e.g. Manrope, Inter, or equivalent).
--   Numeric KPIs: tabular numerals.
--   Use restrained font scale: large hero, clear section heading,
-    readable body, compact metadata.
+## 4. Typography
+- Display: **Bricolage Grotesque** or **Fraunces** (700), friendly and slightly quirky
+- Body: **Plus Jakarta Sans** or **DM Sans**
+- Numbers: **Space Grotesk** with tabular figures
+- Scale: 12 / 14 / 16 / 20 / 28 / 40 / 64 / 96. Hero stat ("12,480 meals rescued") goes huge.
 
-## 4. Layout language
+## 5. Layout: Pinterest Masonry
+- Receiver feed and Impact board are **masonry grids** of food cards with mixed heights, large food photos on top, like a food mood board.
+- 4 columns desktop, 2 tablet, 1 mobile (swipeable card stack for volunteers). Gap 20px.
+- Card types: Food Listing (photo, portions, safe-by ring), Map Peek, Volunteer Task, Impact Stat, Story Card, Badge, Donor Spotlight.
+- Photo cards use rounded 28px corners with a glass caption bar.
 
--   Desktop: generous whitespace, asymmetrical 12-column grid, editorial
-    hero with image collage and floating glass panels.
--   Dashboard: persistent compact navigation rail or top nav, broad
-    content canvas, not a dense left-sidebar clone.
--   Use masonry-style card grids for surplus listings and
-    inspiration/impact content, but preserve logical order and
-    accessible reading sequence.
--   Mobile: single-column cards, bottom navigation or compact header,
-    sticky primary action when helpful.
--   Content max width approximately 1440px; comfortable spacing; avoid
-    overly wide text paragraphs.
+## 6. Signature Components
+1. **Safe-By Ring:** circular countdown around the food photo; teal while safe, shifts to tangerine pulse in the last 30 minutes.
+2. **Rescue Button:** big tangerine pill with a ripple and a heartbeat glow.
+3. **Live Route Strip:** glass bottom sheet over the map with ETA, steps and one-tap status slider ("Slide to confirm pickup").
+4. **Plate Counter:** hero number counting up, with tiny animated plates and spoons orbiting it.
+5. **Match Orbit:** donor in centre, nearby receivers as orbiting avatars; the chosen one snaps in with a teal ring.
+6. **Impact Stickers:** teal, tangerine and berry sticker badges (berry for celebratory ones) ("100 meals", "Night Hero"), slightly rotated, wiggle on hover.
+7. **Quantity Stepper:** chunky pill stepper with portion icons that fill up.
 
-## 5. Key screens
+## 7. Motion (2026 feel)
+- **Framer Motion / Motion One** + **GSAP ScrollTrigger**, optional **Lenis** smooth scroll.
+- Page entry: staggered reveal (translateY 24px, blur 8px to 0, 60ms stagger).
+- Photo cards: hover lift 6px, subtle tilt up to 4deg, image zoom 1.04.
+- Count-ups: `cubic-bezier(.22,1,.36,1)`, 1.2 s.
+- Landing: pinned story sections, horizontal scroll gallery of rescued meals, marquee text.
+- Map pins bounce in; routes draw on with SVG stroke animation.
+- Cursor: teal blob follower with tangerine ring on interactive items (desktop).
+- Confetti burst (tangerine, teal and a few berry pieces) when a delivery completes; the heart icon pops in berry.
+- `prefers-reduced-motion`: disable drift, tilt, confetti and count-ups.
 
-### Marketing / landing
+## 8. Shape and Spacing
+- Radii: 14 (chips), 22 (inputs), 28 (cards), 999 (pills)
+- 8px spacing grid; section padding 96px desktop, 56px mobile
+- Icons: Phosphor duotone, 1.75 stroke; food illustrations are simple, flat, two-colour
 
--   Hero headline: "Good food deserves a second destination."
--   Warm cream background, large editorial type, high-quality food
-    imagery, layered photo tiles, animated curved/organic accent shapes.
--   Hero CTA: "Explore the rescue network"; secondary CTA: "List
-    surplus".
--   Impact strip with real seeded/demo values clearly marked.
--   Three-step narrative: Predict → Match → Rescue.
--   Visual story of donor-to-recipient journey.
--   Testimonial/partner section only with authentic or clearly demo
-    content.
--   Footer with trust, safety, and organization links.
+## 9. Landing Page Sections
+1. Hero: "Don't waste it. Rescue it." with floating glass food cards and a live rescue counter
+2. Marquee of live rescues ("Spice Hub saved 40 meals 12 min ago")
+3. How it works in 3 pinned steps (Post, Match, Deliver)
+4. Masonry gallery of real-style food cards and stories
+5. Impact numbers (plates, kg, CO2e)
+6. For Donors / NGOs / Volunteers tabs
+7. CTA with sunrise-wave background
 
-### Donor dashboard
+## 10. Accessibility
+- Deep Teal Ink `#0B2A2E` for text on glass; white text only on solid tangerine or solid teal (check 4.5:1; use darker tangerine `#E8470F` for small white text if needed)
+- Never rely on colour alone: icons and labels on all statuses
+- 48px minimum tap targets for volunteers; visible 3px focus ring in teal with white offset
+- Alt text on all food photos; table fallbacks for charts
 
--   Greeting and daily surplus forecast.
--   KPI tiles: forecast surplus, active listings, confirmed pickups,
-    rescued quantity.
--   Forecast chart with confidence band and selected period.
--   "Create a surplus listing" primary action.
--   Masonry listing grid with category image, quantity, deadline, state,
-    and compact actions.
--   Distinct urgency chip; avoid alarmist color overload.
+## 11. Tokens (Tailwind)
+```js
+colors: {
+  tangerine: { DEFAULT:'#FF5C1F', 50:'#FFF0EA', 100:'#FFDCCD', 500:'#FF5C1F', 700:'#E8470F' },
+  teal:      { DEFAULT:'#00B8A9', 50:'#E6F9F7', 100:'#C2F0EB', 500:'#00B8A9', 700:'#00877C' },
+  berry:     { DEFAULT:'#FF3D8B', 50:'#FFEBF3', 100:'#FFD1E4', 500:'#FF3D8B', 700:'#D61F6B' },
+  ink: '#0B2A2E', mist: '#EEFAF8'
+}
+```
 
-### Create listing flow
-
--   Multi-step or progressive form: food details → handling & allergens
-    → pickup → review.
--   Inline validation and clear units.
--   Preview card to show how recipient sees listing.
--   Save draft and publish actions.
-
-### Recipient discovery / matching
-
--   Ranked recommendation cards with reason tags: capacity fit, pickup
-    window, category fit, service area.
--   Map is supplementary; list remains usable without map/geocoding.
--   Accept / decline actions with confirmation and accessible feedback.
--   Avoid opaque "AI says so" explanations.
-
-### Pickup coordination
-
--   Timeline with statuses and timestamps.
--   Mobile-friendly pickup instructions and contact details protected by
-    role.
--   Exceptions presented as actionable resolution states.
-
-### Analytics / impact
-
--   Editorial dashboard with meaningful charts, not chart overload.
--   Trends for rescue rate, quantities, match time, category
-    distribution.
--   Explain methodology for meals-equivalent and emissions estimates;
-    clearly label estimates.
--   Download/export only if functional.
-
-### Admin verification
-
--   Organization queue, detail panel, evidence checklist,
-    approve/reject/suspend with reason.
--   Audit trail and status badges.
-
-## 6. Motion and interaction
-
-Use modern motion sparingly and deliberately: - Hero entrance: staggered
-reveal of headline, imagery, and CTA. - Scroll-linked section
-transitions with subtle parallax, only where performant. - Listing
-cards: gentle lift, image scale, and tactile hover state. - KPI numbers:
-count-up only on first reveal and only from real values. - Match state:
-smooth status transition and concise success feedback. - Use spring-like
-easing with short durations; avoid constant floating loops and excessive
-scroll hijacking. - Respect `prefers-reduced-motion`; provide static
-alternatives. - No animation should delay forms, navigation, or core
-actions.
-
-## 7. Glass and surface treatment
-
--   Glassmorphism for floating forecast summary, nav overlays, and hero
-    mini-panel only.
--   Use translucent white, blur, thin warm border, and subtle shadow.
--   Main data surfaces should be solid/legible paper surfaces.
--   Avoid frosted glass over text-heavy areas or every card.
-
-## 8. Image direction
-
--   Use genuine-looking food photography: seasonal produce, bakery
-    surplus, prepared meals, crates, community kitchens.
--   Mix cropped photography with simple vector botanical motifs and
-    abstract shapes.
--   Image cards should have varied aspect ratios in editorial grids.
--   Use a consistent warm natural-light treatment.
--   Do not use images to encode critical information.
--   Provide alt text; avoid fabricated partner logos.
-
-## 9. Components
-
--   Buttons: forest primary, outlined secondary, coral/citrus accent
-    only for contextual actions.
--   Cards: subtle border, low shadow, varied radius (not every component
-    same radius).
--   Tags: compact, semantic, readable.
--   Charts: clean gridlines, accessible labels, hover details, legend.
--   Forms: clear labels, helper text, error messages; never
-    placeholder-only labels.
--   Toasts: short, actionable, screen-reader announced.
--   Empty states: illustration or small visual + next action.
--   Skeletons: match actual layout, not generic shimmer everywhere.
-
-## 10. Accessibility and responsive quality
-
--   Keyboard navigation and visible focus.
--   Contrast-compliant text and controls.
--   Semantic headings, landmarks, labels, and accessible chart
-    summaries.
--   Touch targets at least 44×44 CSS px.
--   Reduced motion.
--   Do not rely solely on color for status.
--   Test 360px mobile, tablet, 1440px desktop, and wide desktop.
+## 12. Do / Don't
+| Do | Don't |
+|---|---|
+| Big real-feeling food photos, huge stats | Stock charity clichés, sad imagery |
+| Hopeful, warm, energetic tone | Guilt-tripping copy |
+| Three colours plus neutrals, berry as a rare spark | Extra accent colours, berry as a main colour, cream tones |
+| One clear action per screen on mobile | Dense dashboards for volunteers |

@@ -1,215 +1,107 @@
-# FoodRescue AI --- Product Requirements Document (PRD)
+# FoodRescue AI: Product Requirements Document
 
-**Version:** 1.0\
-**Status:** Build specification\
-**Product:** Predictive food surplus detection and intelligent
-redistribution platform
+**Tagline:** Good food deserves a plate, not a bin. AI that connects surplus food to people who need it, in minutes.
+**Version:** 1.0 | **Primary market:** India (start: Ahmedabad) | **Platform:** Responsive web app (PWA), mobile-first
 
-## 1. Product vision
+---
 
-FoodRescue AI helps food businesses anticipate edible surplus and
-coordinate timely redistribution to verified NGOs, community kitchens,
-shelters, and other recipient organizations. It transforms surplus from
-a last-minute manual problem into a forecastable, traceable, and
-actionable workflow.
+## 1. Problem
+Restaurants, hotels, caterers, wedding venues, canteens and grocery stores throw away large amounts of safe, edible food every day, while NGOs, shelters and communities nearby go short. The gap is coordination: donors don't know who needs food, NGOs don't know what is available, volunteers don't know where to go, and food has a short safe window.
 
-## 2. Problem
+## 2. Vision
+A real-time rescue network: a donor posts surplus in 30 seconds, AI checks safety and quantity, matches the best nearby receiver, and routes a volunteer. Every rescue is tracked and counted.
 
-Food businesses often discover surplus too late. Recipient organizations
-may not know what food is available, where it is, how much there is, or
-whether it can be safely transported before its deadline. Manual calls
-and messaging create delay, uncertainty, and poor visibility.
+## 3. Target Users
+| Persona | Need |
+|---|---|
+| Donor (restaurant manager, caterer, wedding host) | Post leftover food fast, get a pickup, get an impact/tax receipt |
+| Receiver (NGO, shelter, old-age home, community kitchen) | See available food nearby, accept, know quantity and safe-by time |
+| Volunteer (student, rider, driver) | Pick up and deliver with a simple route and one-tap status |
+| Admin (city coordinator) | Verify partners, monitor safety, view city impact |
 
-## 3. Product goals
+## 4. Goals and Success Metrics
+- Donor posts a listing in **under 45 seconds**
+- Median time from post to pickup under **40 minutes**
+- Match acceptance rate above **70%**
+- Rescued meals: **5,000+ in first 3 months** in the pilot city
+- Food-safety incidents: **zero**
+- Week-4 donor retention above **50%**
 
--   Forecast likely surplus using historical and operational signals.
--   Make surplus listing fast, structured, and traceable.
--   Match donations with suitable recipients using transparent
-    constraints.
--   Support pickup coordination and status tracking.
--   Provide analytics on rescued quantities, successful pickups, expiry
-    risk, and matching performance.
--   Present recommendations as decision support; humans retain
-    food-safety and donation approval responsibility.
+## 5. Core Features (MVP)
+### F1. Surplus Listing
+- Post by photo, voice note or form: food type, quantity (portions/kg), veg/non-veg, packaging, prepared-at time, pickup address
+- AI reads the photo and pre-fills type, estimated portions and allergens; donor confirms
+- Safe-by countdown calculated from food category and storage
 
-## 4. Non-goals
+### F2. Smart Matching
+- Ranks nearby verified receivers by distance, need, capacity, dietary fit, opening hours and fairness (so one NGO doesn't take everything)
+- Receiver gets a push/WhatsApp-style alert with Accept / Decline; auto-escalates to next match after 5 minutes
 
--   Do not certify food safety or replace local regulations.
--   Do not autonomously approve unsafe, expired, or unverified food.
--   Do not promise real-time integrations with POS, inventory, or
-    logistics systems in MVP.
--   Do not build a consumer food marketplace or paid resale platform.
+### F3. Volunteer Logistics
+- Pickup tasks on a live map with route, ETA and one-tap statuses (Accepted, Picked up, Delivered)
+- Batches nearby pickups into one route
+- Proof of delivery: photo plus receiver tap
 
-## 5. Users and roles
+### F4. Food Safety Guard
+- Rules for time and temperature windows by food category
+- Hard block on risky items (e.g. cut fruit beyond window, rice held too long); donor sees the reason
+- Receiver can flag a problem; donor trust score updates
 
-### Donor
+### F5. Impact Dashboard
+- Meals rescued, kg saved, CO2e avoided, rupees value, people fed
+- Donor certificate / CSR-style impact report (PDF)
+- Public city leaderboard of donors (opt-in)
 
-Restaurant, hotel, caterer, grocery store, campus dining, bakery, or
-event organizer. Creates surplus listings, sets pickup window and
-handling details, and tracks handoff.
+### F6. Verified Profiles
+- Donor and receiver onboarding with licence / registration upload (FSSAI, NGO registration), admin approval
 
-### Recipient organization
+## 6. Post-MVP
+Demand forecasting for events (weddings, festivals), WhatsApp bot posting, multilingual voice (Hindi, Gujarati), recurring pickups for hotels and canteens, cold-chain volunteer kits, donation receipts for tax benefits, expansion to more cities.
 
-Verified NGO, shelter, community kitchen, or food bank. Maintains
-capacity, service area, dietary handling capabilities, and pickup
-availability; accepts or declines suitable offers.
+## 7. Functional Requirements
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-1 | Sign up with phone OTP, choose role | P0 |
+| FR-2 | Create listing with photo and AI pre-fill | P0 |
+| FR-3 | Compute safe-by time and block unsafe listings | P0 |
+| FR-4 | Rank and notify nearby receivers | P0 |
+| FR-5 | Accept / decline with auto-escalation | P0 |
+| FR-6 | Assign volunteer and show route | P0 |
+| FR-7 | Status tracking and proof of delivery | P0 |
+| FR-8 | Impact dashboard and PDF report | P1 |
+| FR-9 | Ratings, flags and trust scores | P1 |
+| FR-10 | Admin verification console | P0 |
+| FR-11 | Data export and account delete | P0 |
 
-### Logistics coordinator / volunteer
+## 8. Non-Functional Requirements
+- Works on low-end Android and 4G; first load under 2.5 s
+- Offline-tolerant listing form (queue and sync)
+- Real-time updates under 2 seconds
+- Location data shared only after a match is accepted
+- WCAG 2.2 AA contrast; large tap targets for volunteers
 
-Views assigned pickups, confirms collection and delivery, and records
-exceptions.
+## 9. User Flows
+**Donor:** Open app, tap "Rescue food", snap photo, confirm AI fields, submit, see match and volunteer ETA, get impact receipt.
+**Receiver:** Alert arrives, view food details and safe-by timer, Accept, track volunteer, confirm receipt.
+**Volunteer:** See nearby tasks, accept, follow route, pick up, deliver, earn badge.
 
-### Platform administrator
+## 10. Screens
+Landing, Role Onboarding, Donor Home, New Listing, Listing Detail, Receiver Feed (map + masonry), Volunteer Tasks + Live Route, Impact Dashboard, Profile + Verification, Admin Console, Settings/Privacy.
 
-Verifies organizations, manages taxonomy and platform configuration,
-reviews incidents, and monitors system health.
+## 11. Risks
+| Risk | Mitigation |
+|---|---|
+| Food safety and liability | Strict rules engine, safe-by timers, disclaimers, flagging, trust scores |
+| Fake or bad listings | Verified partners, photo requirement, ratings |
+| Not enough volunteers | Batching, badges, partner delivery riders, receivers can self-pickup |
+| Privacy of addresses | Approximate location until accepted |
+| Wrong AI estimates | Donor confirmation always required; AI never auto-approves safety |
 
-## 6. MVP user journeys
+## 12. Milestones
+- **Week 1:** Auth, roles, listings, safety rules engine
+- **Week 2:** Matching, notifications, receiver feed + map
+- **Week 3:** Volunteer routing, status tracking, proof of delivery
+- **Week 4:** Impact dashboard, admin console, polish, pilot launch
 
-1.  User signs up and selects role.
-2.  Organization submits profile and verification information.
-3.  Donor creates a surplus listing with food category, quantity,
-    preparation/packaging time, best-before/use-by details, storage
-    conditions, allergens, pickup location, and pickup deadline.
-4.  Matching engine ranks eligible recipient organizations.
-5.  Donor or recipient confirms a match; pickup window is agreed.
-6.  Volunteer/logistics user updates pickup and delivery statuses.
-7.  Handoff is recorded with quantity, timestamp, and optional proof.
-8.  Dashboard updates impact metrics and history.
-
-## 7. Functional requirements
-
-### Identity and access
-
--   Email/password authentication with secure password hashing.
--   Role-based access control.
--   Organization verification status: pending, verified, rejected,
-    suspended.
--   Users can only modify records within their authorized organization
-    and role.
-
-### Surplus listing
-
--   Create, edit, cancel, and view listings.
--   Required fields and clear validation.
--   Listing lifecycle: draft → available → reserved → pickup_scheduled →
-    picked_up → delivered → completed; with cancelled/expired/failed
-    branches.
--   Quantity units supported: portions, kg, packs, crates
-    (configurable).
--   Display time remaining and urgency without implying safety
-    certification.
-
-### Prediction
-
--   Predict surplus quantity/category or likelihood for a future period
-    from historical data.
--   Show forecast horizon, confidence/uncertainty, and factors
-    contributing to estimate.
--   Baseline model and evaluation metrics must be documented.
--   If no sufficient history exists, show transparent cold-start
-    guidance and a rule-based estimate.
-
-### Matching
-
--   Hard constraints: organization verification, recipient capacity,
-    pickup deadline compatibility, service area, food category
-    compatibility, handling requirements, and allergen/dietary
-    constraints when supplied.
--   Soft ranking: distance estimate, pickup reliability, capacity fit,
-    prior successful pickups, and fairness/rotation.
--   Explain why a recipient was suggested.
--   Never treat ranking as food-safety approval.
-
-### Pickup and handoff
-
--   Accept/decline, schedule pickup, assign volunteer, and status
-    updates.
--   Record timestamps and quantity at handoff.
--   Exception workflow for no-show, damaged packaging, quantity
-    mismatch, or cancellation.
-
-### Analytics
-
--   Food listed, accepted, picked up, and delivered quantities.
--   Successful rescue rate and expired/cancelled listings.
--   Estimated meals equivalent must be labeled as an estimate and use a
-    documented configurable conversion.
--   Time-to-match and recipient utilization.
--   Filter by date range, donor, category, and location.
-
-### Notifications
-
--   In-app notifications for match suggestions, acceptances, pickup
-    reminders, and status changes.
--   Email notification interface may be stubbed in MVP; provider
-    integration must be isolated behind an adapter.
-
-## 8. Non-functional requirements
-
--   Responsive, accessible design (WCAG 2.2 AA target).
--   API validation and consistent error responses.
--   Secure handling of personal and organization data.
--   Audit logs for sensitive changes and donation lifecycle events.
--   Pagination, indexes, and sensible query limits.
--   Unit tests for matching rules, listing lifecycle, authorization, and
-    prediction service.
--   Seed data and demo mode for local development.
--   Performance target: typical dashboard/API reads \< 500 ms under
-    local demo load, excluding external services.
--   Graceful handling of unavailable geocoding, email, or model service.
-
-## 9. UX principles
-
--   Warm, optimistic, editorial and tactile---not a generic admin
-    template.
--   Light theme only by default: cream, citrus, leafy green, coral,
-    berry, sky blue.
--   Pinterest-inspired masonry/curated card compositions with clear
-    information hierarchy.
--   Glass effects used selectively on floating overlays, not on every
-    surface.
--   Motion is purposeful, reduced-motion aware, and never blocks task
-    completion.
--   Make urgency, quantity, and pickup deadline instantly scannable.
-
-## 10. Success metrics
-
--   Median time from listing to confirmed match.
--   Percentage of available listings successfully picked up before
-    deadline.
--   Quantity delivered versus listed.
--   Recipient acceptance rate.
--   Repeat donor and recipient activity.
--   Prediction MAE/RMSE or classification precision/recall as
-    appropriate.
--   User-reported clarity and ease of listing.
-
-## 11. MVP acceptance criteria
-
--   A donor can create a valid listing and view its lifecycle.
--   Verified recipients receive ranked, explainable matches.
--   Recipient can accept; donor can confirm; pickup can be completed.
--   Unauthorized cross-organization access is blocked and tested.
--   Prediction screen shows model output, uncertainty, and baseline
-    behavior.
--   Dashboard metrics derive from persisted data, not hard-coded
-    counters.
--   App runs locally with documented commands and seeded demo data.
--   Loading, empty, error, and success states are designed.
--   No dark-theme default, placeholder links, or nonfunctional primary
-    actions.
-
-## 12. Risks and mitigations
-
--   **Food safety:** human verification, structured handling fields, no
-    automated safety claims.
--   **Cold-start prediction:** baseline rules, data collection,
-    uncertainty disclosure.
--   **Recipient capacity mismatch:** configurable capacity and hard
-    constraints.
--   **Sparse location data:** allow manually entered service zones;
-    isolate geocoding.
--   **Demo data confusion:** label seeded/demo records.
--   **Privacy:** minimize collection, role-based visibility, audit
-    access.
+## 13. Out of Scope (v1)
+Payments, selling food, cooking or hygiene certification, legal tax receipts (v1 gives an impact report only).

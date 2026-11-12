@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ../
+      dockerfile: infra/Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - LLM_PROVIDER=${LLM_PROVIDER:-mock}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    volumes:
+      - ../packages/safety-rules:/app/packages/safety-rules:ro
+    depends_on:
+      - redis
+    restart: unless-stopped
+

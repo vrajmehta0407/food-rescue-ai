@@ -1,0 +1,39 @@
+{
+  "_notice": "SAMPLE DATA - VERIFY BEFORE PRODUCTION USE. Emission and meal value factors are illustrative defaults for pilot reporting.",
+  "version": "1.0.0",
+  "default_kg_per_portion": 0.35,
+  "default_inr_per_meal": 45.0,
+  "categories": {
+    "cooked_rice_dish": {
+      "kg_per_portion": 0.35,
+      "co2e_kg_per_kg_food": 2.7,
+      "inr_per_portion": 45.0
+    },
+    "cooked_curry_dal": {
+      "kg_per_portion": 0.32,
+      "co2e_kg_per_kg_food": 2.1,
+      "inr_per_portion": 50.0
+    },
+    "breads_rotis": {
+      "kg_per_portion": 0.22,
+      "co2e_kg_per_kg_food": 1.4,
+      "inr_per_portion": 30.0
+    },
+    "dairy_sweets": {
+      "kg_per_portion": 0.18,
+      "co2e_kg_per_kg_food": 3.4,
+      "inr_per_portion": 60.0
+    },
+    "cut_fruit_salad": {
+      "kg_per_portion": 0.25,
+      "co2e_kg_per_kg_food": 1.1,
+      "inr_per_portion": 40.0
+    },
+    "packaged_dry_staples": {
+      "kg_per_portion": 0.4,
+      "co2e_kg_per_kg_food": 1.6,
+      "inr_per_portion": 35.0
+    }
+  }
+}
+
